@@ -1,6 +1,8 @@
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.RequestHelpers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,26 +20,41 @@ public class ProductController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ProductDto>>> GetProducts()
+    public async Task<ActionResult<List<ProductDto>>> GetProducts([FromQuery]ProductParams productParams)
     {
-        var products = await _context.ProductsSizes
-            .Include(p => p.Product)
-            .ThenInclude(s => s.Sizes)
-            .ToListAsync();
+        var query = _context.Products
+            .Include(s => s.InventoryItems)
+            .Sort(productParams.OrderBy)
+            .Search(productParams.SearchTerm)
+            .Filter(productParams.Brands, productParams.Sexs)
+            .AsQueryable();
 
-        var productsDto = _mapper.Map<List<ProductDto>>(products);
+        var products = await PagedList<Product>.ToPagedList(query, 
+            productParams.PageNumber, productParams.PageSize);
 
-        return Ok(productsDto);
+        Response.AddPaginationHeader(products.MetaData);
+
+        return _mapper.Map<List<ProductDto>>(products);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductDto>> GetProduct([FromRoute]int id)
     {
-        var product = await _context.ProductsSizes
-            .Include(p => p.Product)
-            .ThenInclude(s => s.Sizes)
-            .FirstOrDefaultAsync(p => p.Product.Id == id);
+        var product = await _context.Products
+            .Include(s => s.InventoryItems)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        if(product == null) return NotFound();
 
         return _mapper.Map<ProductDto>(product);
+    }
+
+    [HttpGet("filters")]
+    public async Task<IActionResult> GetFilters()
+    {
+        var brands = await _context.Products.Select(p => p.Brand).Distinct().ToListAsync();
+        var sexs = await _context.Products.Select(p => p.Sex).Distinct().ToListAsync();
+
+        return Ok(new {brands, sexs});
     }
 }

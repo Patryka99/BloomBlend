@@ -10,5 +10,6 @@ public class Product
     public string PictureUrl3 { get; set; }
     public string Sex { get; set; }
     public string Brand { get; set; }
-    public List<Size> Sizes { get; set; } = new ();
+    public long Price { get; set; }
+    public List<InventoryItem> InventoryItems { get; set; } = new ();
 }

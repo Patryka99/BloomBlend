@@ -11,30 +11,13 @@ public class StoreContext : DbContext
     }
 
     public DbSet<Product> Products { get; set; }
-    public DbSet<Size> Sizes { get; set; }
-    public DbSet<ProductsSizes> ProductsSizes { get; set; }
+    public DbSet<InventoryItem> InventoryItems { get; set; }
+    public DbSet<Basket> Basket { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Product>()
-                .HasMany(s => s.Sizes)
-                .WithMany(p => p.Products)
-                .UsingEntity<ProductsSizes>(
-                    u => u.HasOne(wit => wit.Size)
-                        .WithMany()
-                        .HasForeignKey(wit => wit.SizeId),
-
-                    u => u.HasOne(wit => wit.Product)
-                        .WithMany()
-                        .HasForeignKey(wit => wit.ProductId),
-
-                    wit =>
-                    {
-                        wit.HasKey(x => x.Id);
-                    }
-                    );
         }
 
 

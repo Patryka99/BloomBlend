@@ -7,15 +7,10 @@ public class DbInitializer
 {
     public static async Task Initialize(StoreContext context)
     {
-        if (!context.Sizes.Any() && !context.Products.Any())
+        if (!context.InventoryItems.Any() && !context.Products.Any())
         {
-            var Sizes = new List<Size>
-            {
-                new Size {SizeMl = 200},
-                new Size {SizeMl = 100},
-                new Size {SizeMl = 50},
-                new Size {SizeMl = 30}
-            };
+
+            Random r = new Random();
 
             var Products = new List<Product>
             {
@@ -28,6 +23,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Bryza Nadmorska3.jpg",
                     Sex = "Uni",
                     Brand = "Brand1",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -38,6 +34,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Cynamonowa Pasja3.jpg",
                     Sex = "Uni",
                     Brand = "Brand1",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -48,6 +45,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Deszcz Kwiatów3.jpg",
                     Sex = "Female",
                     Brand = "Brand1",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -58,6 +56,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Egzotyczna Przygoda3.jpg",
                     Sex = "Uni",
                     Brand = "Brand1",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -68,6 +67,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Ekskluzywna Noc3.jpg",
                     Sex = "Female",
                     Brand = "Brand2",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -78,6 +78,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Ekskluzywny Styl3.jpg",
                     Sex = "Male",
                     Brand = "Brand2",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -88,6 +89,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Elegancja Gentlemana3.jpg",
                     Sex = "Male",
                     Brand = "Brand2",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -98,6 +100,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Kawowy Zestaw3.jpg",
                     Sex = "Uni",
                     Brand = "Brand3",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -108,6 +111,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Kwiatowy Urok3.jpg",
                     Sex = "Female",
                     Brand = "Brand3",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -118,6 +122,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Magiczny Las3.jpg",
                     Sex = "Uni",
                     Brand = "Brand3",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -128,6 +133,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Męska Ekstrawagancja3.jpg",
                     Sex = "Male",
                     Brand = "Brand3",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -138,6 +144,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Mistrz Męskości3.jpg",
                     Sex = "Male",
                     Brand = "Brand4",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -148,6 +155,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Mroczna Tajemnica3.jpg",
                     Sex = "Female",
                     Brand = "Brand4",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -158,6 +166,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Mroźny Deszcz3.jpg",
                     Sex = "Uni",
                     Brand = "Brand4",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -168,6 +177,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Nocne Marzenia3.jpg",
                     Sex = "Female",
                     Brand = "Brand4",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -178,6 +188,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Podróżna Opowieść3.jpg",
                     Sex = "Male",
                     Brand = "Brand4",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -188,6 +199,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Seksowna Nuta3.jpg",
                     Sex = "Female",
                     Brand = "Brand5",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -198,6 +210,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Słoneczne Promienie3.jpg",
                     Sex = "Female",
                     Brand = "Brand5",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -208,6 +221,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Zachód Słońca3.jpg",
                     Sex = "Uni",
                     Brand = "Brand5",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -218,6 +232,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Zapach Wolności3.jpg",
                     Sex = "Male",
                     Brand = "Brand5",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -228,6 +243,7 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Złoty Deszcz3.jpg",
                     Sex = "Uni",
                     Brand = "Brand6",
+                    Price = r.Next(20000, 50000)
                 },
                 new Product
                 {
@@ -238,68 +254,53 @@ public class DbInitializer
                     PictureUrl3 = "/images/products/Zmysłowa Nuta3.jpg",
                     Sex = "Female",
                     Brand = "Brand6",
+                    Price = r.Next(20000, 50000)
                 },
             };
 
-            Random r = new Random();
 
-            var ProductsSizes = new List<ProductsSizes>();
-            
-                foreach (var item in Products)
-                {
-                    ProductsSizes.Add(
-                        new ProductsSizes
-                        {
-                            Product = item,
-                            Size = Sizes[0],
-                            Price = r.Next(50000, 80000),
-                            QuantityInStock = 500
-                        }
-                    );
-                    ProductsSizes.Add(
-                        new ProductsSizes
-                        {
-                            Product = item,
-                            Size = Sizes[0],
-                            Price = r.Next(30000, 65000),
-                            QuantityInStock = 500
-                        }
-                    );
-                    ProductsSizes.Add(
-                        new ProductsSizes
-                        {
-                            Product = item,
-                            Size = Sizes[0],
-                            Price = r.Next(21000, 29000),
-                            QuantityInStock = 500
-                        }
-                    );
-                    ProductsSizes.Add(
-                        new ProductsSizes
-                        {
-                            Product = item,
-                            Size = Sizes[0],
-                            Price = r.Next(10000, 19999),
-                            QuantityInStock = 500
-                        }
-                    );
-                }
+            var InventoryItems = new List<InventoryItem>();     
 
-            foreach (var item in Sizes)
+            foreach (var item in Products)
             {
-                context.Sizes.Add(item);
+                InventoryItems.Add( new InventoryItem
+                {
+                    SizeMl = 200,
+                    PricePercent = 170,
+                    QuantityInStock = 300,
+                    Product = item
+                });
+                InventoryItems.Add( new InventoryItem
+                {
+                    SizeMl = 100,
+                    PricePercent = 100,
+                    QuantityInStock = 300,
+                    Product = item
+                });
+                InventoryItems.Add( new InventoryItem
+                {
+                    SizeMl = 50,
+                    PricePercent = 70,
+                    QuantityInStock = 300,
+                    Product = item
+                });
+                InventoryItems.Add( new InventoryItem
+                {
+                    SizeMl = 30,
+                    PricePercent = 50,
+                    QuantityInStock = 300,
+                    Product = item
+                });
+            }
+
+            foreach (var item in InventoryItems)
+            {
+                context.InventoryItems.Add(item);
             }
 
             foreach (var item in Products)
             {
                 context.Products.Add(item);
-            }
-
-            context.SaveChanges();
-
-            foreach (var item in ProductsSizes)
-            {
-                context.ProductsSizes.Add(item);
             }
 
             context.SaveChanges();
