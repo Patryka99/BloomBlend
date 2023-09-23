@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import Slider from 'react-slick';
 import './Carousel.css';
 

@@ -5,10 +5,11 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router/Routes';
+import { StoreProvider } from './app/context/StoreContex';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-    <RouterProvider router={router} />
+    <StoreProvider>
+      <RouterProvider router={router} />
+    </StoreProvider>
   </>
 );
 
