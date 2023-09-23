@@ -12,4 +12,8 @@ public class Product
     public string Brand { get; set; }
     public long Price { get; set; }
     public List<InventoryItem> InventoryItems { get; set; } = new ();
+    public string PublicId { get; set; }
+    public string PublicId2 { get; set; }
+    public string PublicId3 { get; set; }
+
 }
