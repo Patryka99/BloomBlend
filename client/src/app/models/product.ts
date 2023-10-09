@@ -17,3 +17,13 @@ export interface InventoryItem {
     pricePercent: number;
     quantityInStock: number;
 }
+
+export interface ProductParams {
+    orderBy: string;
+    searchTerm?: string;
+    sexs: string[];
+    brands: string[];
+    pageNumber: number;
+    pageSize: number;
+    
+}

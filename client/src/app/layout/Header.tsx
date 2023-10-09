@@ -1,7 +1,8 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Box, Divider, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-import { useStoreContext } from "../context/StoreContex";
+import { useAppSelector } from "../store/configureStore";
+import SignedInMenu from "./SignedInMenu";
 
 const midLinks = [
     { title: 'catalog', path: '/catalog' },
@@ -30,13 +31,37 @@ const navStyles = {
     }
 }
 
+const navStyles2 = {
+    color: 'primary.dark',
+    textDecoration: 'none',
+    typography: 'h6',
+    '&:hover': {
+        color: 'grey.500',
+        textDecoration: 'overline',
+        textUnderlineOffset: 8
+    },
+    '&.active': {
+        color: 'primary.main',
+        textDecoration: 'underline',
+        textUnderlineOffset: 8
+    }
+}
+
+const divider = {
+    backgroundColor: 'primary.dark',
+    mt: 2,
+    borderBottomWidth: 4
+}
+
+
 interface Props {
     darkMode: boolean;
     handleThemeChange: () => void;
 }
 
 export default function Header({ darkMode, handleThemeChange }: Props) {
-    const {basket} = useStoreContext();
+    const { basket } = useAppSelector(state => state.basket);
+    const { user } = useAppSelector(state => state.account);
     const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
@@ -46,7 +71,6 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
             margin: 'auto',
             marginTop: 3,
             background: 'transparent',
-            borderBottom: '2px solid',
             color: 'inherit',
             mb: 4,
         }}>
@@ -78,25 +102,28 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                 </Box>
 
                 <Box display='flex' alignItems='center'>
-                    <IconButton component={Link} to='/basket' size='large' edge='start' color='inherit' sx={{ mr: 2 }}>
+                    <IconButton component={Link} to='/basket' size='large' edge='start' sx={{ mr: 2, color: 'primary.dark' }}>
                         <Badge badgeContent={itemCount} color='primary'>
                             <ShoppingCart />
                         </Badge>
                     </IconButton>
-                    <List sx={{ display: 'flex' }}>
+                    {user ? (
+                        <SignedInMenu />
+                    ) : (<List sx={{ display: 'flex' }}>
                         {rightLinks.map(({ title, path }) => (
                             <ListItem
                                 component={NavLink}
                                 to={path}
                                 key={path}
-                                sx={navStyles}
+                                sx={navStyles2}
                             >
                                 {title.toUpperCase()}
                             </ListItem>
                         ))}
-                    </List>
+                    </List>)}
                 </Box>
             </Toolbar>
+            <Divider variant="middle" sx={divider} />
         </AppBar>
     )
 }

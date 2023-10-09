@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import Slider from 'react-slick';
-import './Carousel.css';
+import './home.css';
 
 export default function CatalogSlider() {
     const settings = {
@@ -13,36 +13,25 @@ export default function CatalogSlider() {
     };
 
     return (
-        <Container maxWidth={false} sx={{width: '80%', mb: 3}}>
+        <Container maxWidth={false} sx={{width: '90%', mb: 3}}>
             <Slider {...settings}>
                 <div>
-                    <img src="/images/banner/Banner1.png" alt='banner' 
+                    <img src="/images/1.png" alt='banner' 
                     style={{
                         display: 'block',
-                        width: '98%',
-                        maxHeight: 250,
+                        width: '100%',
+                        maxHeight: 700,
                         margin: 'auto',
                         borderRadius: 30
                     }}
                     />
                 </div>
                 <div>
-                    <img src="/images/banner/Banner2.png" alt='banner' 
+                    <img src="/images/2.png" alt='banner' 
                     style={{
                         display: 'block',
-                        width: '98%',
-                        maxHeight: 250,
-                        margin: 'auto',
-                        borderRadius: 30
-                    }}
-                    />
-                </div>
-                <div>
-                    <img src="/images/banner/Banner3.png" alt='banner' 
-                    style={{
-                        display: 'block',
-                        width: '98%',
-                        maxHeight: 250,
+                        width: '100%',
+                        maxHeight: 700,
                         margin: 'auto',
                         borderRadius: 30
                     }}

@@ -1,0 +1,11 @@
+.slick-prev:before {
+    color: #1565c0 !important;
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+.slick-next:before {
+    color: #1565c0 !important;
+    background-color: transparent;
+    border-radius: 50%;
+}

@@ -1,13 +1,13 @@
 import { TableContainer, Paper, Table, TableBody, TableRow, TableCell } from "@mui/material";
 import { currencyFormat } from "../../app/util/util";
-import { useStoreContext } from "../../app/context/StoreContex";
+import { useAppSelector } from "../../app/store/configureStore";
 
 interface Props {
     subtotal?: number;
 }
 
 export default function BasketSummary({subtotal}: Props) {
-    const {basket} = useStoreContext();
+    const {basket} = useAppSelector(state => state.basket);
     if (subtotal === undefined)
         subtotal = basket?.items.reduce((sum, item) => sum + (item.price * item.quantity), 0) ?? 0;
     
@@ -32,7 +32,7 @@ export default function BasketSummary({subtotal}: Props) {
                         </TableRow>
                         <TableRow>
                             <TableCell>
-                                <span style={{ fontStyle: 'italic' }}>*Orders over $100 qualify for free delivery</span>
+                                <span style={{ fontStyle: 'italic' }}>*Free delivery startsfrom $200</span>
                             </TableCell>
                         </TableRow>
                     </TableBody>

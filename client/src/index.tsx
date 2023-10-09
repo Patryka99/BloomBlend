@@ -9,18 +9,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router/Routes';
-import { StoreProvider } from './app/context/StoreContex';
+import { Provider } from 'react-redux';
+import { store } from './app/store/configureStore';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <>
-    <StoreProvider>
+    <Provider store={store}>
       <RouterProvider router={router} />
-    </StoreProvider>
-  </>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
