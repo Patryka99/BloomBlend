@@ -11,5 +11,5 @@ public class ProductDto
     public string Sex { get; set; }
     public string Brand { get; set; }
     public long Price { get; set; }
-    public List<InventoryItemsDto> Sizes { get; set; }
+    public List<InventoryItemsDto> InventoryItems { get; set; }
 }
