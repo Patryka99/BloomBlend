@@ -26,6 +26,4 @@ public class CreateProductDto
     [Required]
     public long Price { get; set; }
 
-    [Required]
-    public List<InventoryItemCreateDto> InventoryItems { get; set; }
 }

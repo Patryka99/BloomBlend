@@ -64,7 +64,7 @@ public class ProductController : BaseApiController
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public async Task<ActionResult<CreateProductDto>> CreateProduct([FromForm]CreateProductDto productDto)
+    public async Task<ActionResult<CreateProductDto>> CreateProduct([FromForm] CreateProductDto productDto)
     {
         var product = new Product
         {
@@ -73,20 +73,37 @@ public class ProductController : BaseApiController
             Sex = productDto.Sex,
             Brand = productDto.Brand,
             Price = productDto.Price,
-            InventoryItems = productDto.InventoryItems.Select(item => new InventoryItem
+            InventoryItems = new List<InventoryItem>
             {
-                SizeMl = item.SizeMl,
-                PricePercent = item.PricePercent,
-                QuantityInStock = item.QuantityInStock
-            }).ToList()
+                new InventoryItem{
+                    SizeMl = 200,
+                    PricePercent = 170,
+                    QuantityInStock = 100,
+                },
+                new InventoryItem{
+                    SizeMl = 100,
+                    PricePercent = 100,
+                    QuantityInStock = 100,
+                },
+                new InventoryItem{
+                    SizeMl = 50,
+                    PricePercent = 70,
+                    QuantityInStock = 100,
+                },
+                new InventoryItem{
+                    SizeMl = 30,
+                    PricePercent = 50,
+                    QuantityInStock = 100,
+                }
+            }
         };
 
         if (productDto.PictureUrl != null)
         {
             var imageResult = await _imageService.AddImageAsync(productDto.PictureUrl);
 
-            if(imageResult.Error != null) 
-                return BadRequest(new ProblemDetails{Title = imageResult.Error.Message});
+            if (imageResult.Error != null)
+                return BadRequest(new ProblemDetails { Title = imageResult.Error.Message });
 
             product.PictureUrl = imageResult.SecureUrl.ToString();
             product.PublicId = imageResult.PublicId;
@@ -94,8 +111,8 @@ public class ProductController : BaseApiController
             {
                 var imageResult2 = await _imageService.AddImageAsync(productDto.PictureUrl2);
 
-                if(imageResult2.Error != null) 
-                    return BadRequest(new ProblemDetails{Title = imageResult2.Error.Message});
+                if (imageResult2.Error != null)
+                    return BadRequest(new ProblemDetails { Title = imageResult2.Error.Message });
 
                 product.PictureUrl2 = imageResult2.SecureUrl.ToString();
                 product.PublicId2 = imageResult2.PublicId;
@@ -104,8 +121,8 @@ public class ProductController : BaseApiController
             {
                 var imageResult3 = await _imageService.AddImageAsync(productDto.PictureUrl3);
 
-                if(imageResult3.Error != null) 
-                    return BadRequest(new ProblemDetails{Title = imageResult3.Error.Message});
+                if (imageResult3.Error != null)
+                    return BadRequest(new ProblemDetails { Title = imageResult3.Error.Message });
 
                 product.PictureUrl3 = imageResult3.SecureUrl.ToString();
                 product.PublicId3 = imageResult3.PublicId;
@@ -123,16 +140,11 @@ public class ProductController : BaseApiController
 
     [Authorize(Roles = "Admin")]
     [HttpPut]
-    public async Task<ActionResult> UpdateProduct([FromForm]UpdateProductDto productDto)
+    public async Task<ActionResult> UpdateProduct([FromForm] UpdateProductDto productDto)
     {
         var product = await _context.Products.FindAsync(productDto.Id);
 
         if (product == null) return NotFound();
-
-        foreach (var item in product.InventoryItems)
-        {
-            _mapper.Map(productDto.InventoryItems, item);
-        }
 
         _mapper.Map(productDto, product);
 
@@ -140,10 +152,10 @@ public class ProductController : BaseApiController
         {
             var imageResult = await _imageService.AddImageAsync(productDto.PictureUrl);
 
-            if(imageResult.Error != null) 
-                return BadRequest(new ProblemDetails{Title = imageResult.Error.Message});
+            if (imageResult.Error != null)
+                return BadRequest(new ProblemDetails { Title = imageResult.Error.Message });
 
-            if (!string.IsNullOrEmpty(product.PublicId)) 
+            if (!string.IsNullOrEmpty(product.PublicId))
                 await _imageService.DeleteImageAsync(product.PublicId);
 
             product.PictureUrl = imageResult.SecureUrl.ToString();
@@ -154,10 +166,10 @@ public class ProductController : BaseApiController
         {
             var imageResult = await _imageService.AddImageAsync(productDto.PictureUrl2);
 
-            if(imageResult.Error != null) 
-                return BadRequest(new ProblemDetails{Title = imageResult.Error.Message});
+            if (imageResult.Error != null)
+                return BadRequest(new ProblemDetails { Title = imageResult.Error.Message });
 
-            if (!string.IsNullOrEmpty(product.PublicId2)) 
+            if (!string.IsNullOrEmpty(product.PublicId2))
                 await _imageService.DeleteImageAsync(product.PublicId2);
 
             product.PictureUrl2 = imageResult.SecureUrl.ToString();
@@ -168,10 +180,10 @@ public class ProductController : BaseApiController
         {
             var imageResult = await _imageService.AddImageAsync(productDto.PictureUrl3);
 
-            if(imageResult.Error != null) 
-                return BadRequest(new ProblemDetails{Title = imageResult.Error.Message});
+            if (imageResult.Error != null)
+                return BadRequest(new ProblemDetails { Title = imageResult.Error.Message });
 
-            if (!string.IsNullOrEmpty(product.PublicId3)) 
+            if (!string.IsNullOrEmpty(product.PublicId3))
                 await _imageService.DeleteImageAsync(product.PublicId3);
 
             product.PictureUrl3 = imageResult.SecureUrl.ToString();
@@ -193,8 +205,8 @@ public class ProductController : BaseApiController
 
         if (product == null) return NotFound();
 
-        if (!string.IsNullOrEmpty(product.PublicId3)) 
-                await _imageService.DeleteImageAsync(product.PublicId3);
+        if (!string.IsNullOrEmpty(product.PublicId3))
+            await _imageService.DeleteImageAsync(product.PublicId3);
 
         _context.Products.Remove(product);
 

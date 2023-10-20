@@ -56,12 +56,12 @@ export default function ProductDetails() {
         }
     }
 
-    var sortOptions: any[] = [
-    ]
+    // var sortOptions: any[] = [
+    // ]
 
-    product?.inventoryItems.map(item => (
-        sortOptions.push({value: item.pricePercent, label: item.sizeMl})
-    ))
+    // product?.inventoryItems.map(item => (
+    //     sortOptions.push({value: item.pricePercent, label: item.sizeMl})
+    // ))
 
     if (loading) return <LoadingComponent message="Loading product..." />
 

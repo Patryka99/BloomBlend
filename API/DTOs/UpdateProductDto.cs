@@ -27,6 +27,4 @@ public class UpdateProductDto
     [Required]
     public long Price { get; set; }
 
-    [Required]
-    public List<UpdateInventoryItemDto> InventoryItems { get; set; }
 }

@@ -8,7 +8,6 @@ export interface Product {
     sex: string;
     brand: string;
     price: number;
-    inventoryItems: InventoryItem[];
 }
 
 export interface InventoryItem {

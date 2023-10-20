@@ -2,11 +2,10 @@ import { Remove, Add, Delete } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Box } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../app/store/configureStore";
-import { BasketItem } from "../../app/models/basket";
 import { addBasketItemAsync, removeBasketItemAsync } from "./basketSlice";
 
 interface Props {
-    items: BasketItem[];
+    items: any[];
     isBasket?: boolean;
 }
 
